@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipes - Home Plate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#F7FFF7] text-[#2D2D2D] min-h-screen">
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 shadow-md" style="background-color: var(--primary-red);">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
+      <div class="hidden md:flex gap-6 text-white">
+        <a href="shopping.html">Shopping</a>
+        <a href="recipes.html" class="font-semibold underline">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-4 py-2" style="background-color: var(--primary-red);">
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+      <a href="recipes.html" class="block text-white py-1 font-semibold">Recipes</a>
+      <a href="about.html" class="block text-white py-1">About</a>
+      <a href="contact.html" class="block text-white py-1">Contact</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
+    </div>
+  </nav>
+
+  <!-- Recipes Grid -->
+  <section id="recipes-grid" class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <!-- Recipe cards are rendered by JS -->
+  </section>
+
+  <!-- Recipe Modal -->
+  <div id="recipe-modal" class="recipe-modal flex items-center justify-center p-4">
+    <div class="modal-content rounded-xl p-8 relative">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-600 hover:text-[#FF6B6B]">&times;</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Recipe Data and Scripts -->
+  <script>
+  const allRecipes = [ 
+    {
+      title: "Vegetable Stir Fry",
+      cuisine: "Asian",
+      diet: "Vegan",
+      ingredients: [
+        "1 cup broccoli florets",
+        "1 red bell pepper",
+        "1 yellow bell pepper",
+        "1 onion, sliced",
+        "2 carrots, julienned",
+        "1 cup snap peas",
+        "1/2 cup soy sauce",
+        "1 tbsp sesame oil",
+        "1 tsp ginger, minced",
+        "2 garlic cloves, minced",
+        "2 tbsp rice vinegar",
+        "2 tbsp brown sugar",
+        "1 tbsp cornstarch",
+        "1 tbsp sesame seeds",
+        "2 tbsp vegetable oil",
+        "Chili flakes",
+        "1 tbsp lime juice",
+        "2 tbsp water",
+        "1 cup cooked rice",
+        "1/4 cup fresh cilantro"
+      ],
+      instructions: [
+        "Heat oil in a pan and stir-fry garlic and ginger for 2 minutes.",
+        "Add the vegetables and stir-fry for 5-7 minutes until tender.",
+        "Mix soy sauce, rice vinegar, sugar, and cornstarch, then pour over vegetables.",
+        "Cook for another 2 minutes to thicken the sauce.",
+        "Serve with rice, garnish with sesame seeds and cilantro."
+      ],
+      img: "images/vegetable-stir-fry.jpg",
+      cookTime: "15 minutes",
+      rating: 4.5,
+      reviews: 89
+    },
+    {
+      img: 'images/carbonara.jpg',
+      title: 'Spaghetti Carbonara',
+      cuisine: 'Italian',
+      cookTime: '30 mins',
+      diet: 'Non-vegetarian',
+      ingredients: [
+        '400g spaghetti',
+        '200g pancetta',
+        '4 large eggs',
+        '1 cup Pecorino Romano cheese',
+        'Freshly ground black pepper'
+      ],
+      instructions: [
+        'Boil spaghetti in salted water until al dente',
+        'Cook pancetta in pan until crispy',
+        'Whisk eggs and cheese in bowl',
+        'Combine hot pasta with pancetta and fat',
+        'Toss with egg mixture to create creamy sauce',
+        'Season with black pepper and serve immediately'
+      ],
+      author: 'Giada De Laurentiis',
+      rating: 4.8,
+      reviews: 45
+    },
+    {
+      img: 'images/buddha-bowl.jpg',
+      title: 'Rainbow Buddha Bowl',
+      cuisine: 'International',
+      cookTime: '40 mins',
+      diet: 'Vegan',
+      ingredients: [
+        '1 cup quinoa',
+        '1 sweet potato',
+        '1 avocado',
+        '1 cup chickpeas',
+        '1 cup red cabbage',
+        '2 tbsp tahini',
+        '1 lemon (juiced)'
+      ],
+      instructions: [
+        'Cook quinoa according to package instructions',
+        'Roast sweet potato cubes at 400°F for 25 mins',
+        'Massage kale with lemon juice and olive oil',
+        'Assemble bowl with all ingredients',
+        'Drizzle with tahini dressing',
+        'Add microgreens for garnish'
+      ],
+      author: 'Ella Woodward',
+      rating: 4.9,
+      reviews: 32
+    },
+
+    {
+      img: 'images/pho.jpg',
+      title: 'Pho Bo Vietnamese Noodle Soup',
+      cuisine: 'Vietnamese',
+      cookTime: '4 hrs',
+      diet: 'Non-vegetarian',
+      ingredients: [
+        '2 lbs beef bones',
+        '1 lb beef brisket',
+        '2 cinnamon sticks',
+        '4 star anise',
+        '1 ginger root (charred)',
+        '1 lb rice noodles',
+        'Bean sprouts, basil, lime'
+      ],
+      instructions: [
+        'Roast bones in oven at 450°F for 30 mins',
+        'Simmer bones with spices for 4 hours',
+        'Slice brisket thinly against the grain',
+        'Cook rice noodles according to package',
+        'Assemble bowls with broth, noodles, and meat',
+        'Top with fresh herbs and condiments'
+      ],
+      author: 'Andrea Nguyen',
+      rating: 4.7,
+      reviews: 28
+    },
+    {
+      img: 'images/tikka.jpg',
+      title: 'Chicken Tikka Masala',
+      cuisine: 'Indian',
+      cookTime: '50 mins',
+      diet: 'Non-vegetarian',
+      ingredients: [
+        '1.5 lbs chicken thighs',
+        '1 cup yogurt',
+        '2 tbsp tikka masala paste',
+        '1 can crushed tomatoes',
+        '1 cup heavy cream',
+        '1 tsp garam masala',
+        'Basmati rice for serving'
+      ],
+      instructions: [
+        'Marinate chicken in yogurt and spices for 30 mins',
+        'Grill chicken until charred',
+        'Sauté onions and garlic in ghee',
+        'Add tomatoes and simmer for 15 mins',
+        'Stir in cream and cooked chicken',
+        'Serve with steamed basmati rice'
+      ],
+      author: 'Madhur Jaffrey',
+      rating: 4.8,
+      reviews: 39
+    },
+    {
+      img: 'images/teriyaki.jpg',
+      title: 'Salmon Teriyaki',
+      cuisine: 'Japanese',
+      cookTime: '25 mins',
+      diet: 'Pescatarian',
+      ingredients: [
+        '4 salmon fillets',
+        '1/2 cup mirin',
+        '1/4 cup soy sauce',
+        '2 tbsp sake',
+        '1 tbsp brown sugar',
+        '1 tsp grated ginger',
+        'Sesame seeds for garnish'
+      ],
+      instructions: [
+        'Pat salmon dry and score skin',
+        'Combine sauce ingredients in pan',
+        'Reduce sauce until thickened',
+        'Pan-sear salmon skin-side down',
+        'Glaze salmon with teriyaki sauce',
+        'Serve with steamed rice and broccoli'
+      ],
+      author: 'Naomi Takei',
+      rating: 4.6,
+      reviews: 24
+    },
+    {
+      img: 'images/ratatouille.jpg',
+      title: 'Provençal Ratatouille',
+      cuisine: 'French',
+      cookTime: '1 hr 15 mins',
+      diet: 'Vegetarian',
+      ingredients: [
+        '1 eggplant',
+        '2 zucchinis',
+        '1 red bell pepper',
+        '4 tomatoes',
+        '1 onion',
+        '3 garlic cloves',
+        'Herbes de Provence'
+      ],
+      instructions: [
+        'Dice vegetables into even pieces',
+        'Sauté onions and garlic in olive oil',
+        'Cook peppers until softened',
+        'Add eggplant and zucchini',
+        'Stir in tomatoes and herbs',
+        'Simmer covered for 45 minutes'
+      ],
+      author: 'Julia Child',
+      rating: 4.5,
+      reviews: 19
+    },
+    {
+      img: 'images/tacos.jpg',
+      title: 'Baja Fish Tacos',
+      cuisine: 'Mexican',
+      cookTime: '35 mins',
+      diet: 'Pescatarian',
+      ingredients: [
+        '1 lb white fish fillets',
+        '1 cup beer batter',
+        'Corn tortillas',
+        'Cabbage slaw',
+        'Chipotle mayo',
+        'Lime wedges',
+        'Cotija cheese'
+      ],
+      instructions: [
+        'Cut fish into strips and marinate',
+        'Make batter with flour and beer',
+        'Fry fish until golden brown',
+        'Warm tortillas on griddle',
+        'Assemble tacos with slaw and fish',
+        'Drizzle with sauce and cheese'
+      ],
+      author: 'Rick Bayless',
+      rating: 4.7,
+      reviews: 27
+    },
+    {
+      img: 'images/moussaka.jpg',
+      title: 'Greek Moussaka',
+      cuisine: 'Greek',
+      cookTime: '2 hrs',
+      diet: 'Non-vegetarian',
+      ingredients: [
+        '2 eggplants',
+        '1 lb ground lamb',
+        '3 potatoes',
+        '1 can tomato puree',
+        'Béchamel sauce',
+        'Kefalotyri cheese',
+        'Cinnamon & nutmeg'
+      ],
+      instructions: [
+        'Slice and salt eggplant',
+        'Brown lamb with onions',
+        'Layer potato slices in dish',
+        'Add eggplant and meat layers',
+        'Top with béchamel sauce',
+        'Bake at 375°F for 45 mins'
+      ],
+      author: 'Diane Kochilas',
+      rating: 4.6,
+      reviews: 22
+    },
+    {
+      img: 'images/bibimap.jpg',
+      title: 'Korean Bibimbap',
+      cuisine: 'Korean',
+      cookTime: '45 mins',
+      diet: 'Non-vegetarian',
+      ingredients: [
+        '2 cups short-grain rice',
+        '200g beef bulgogi',
+        'Bean sprouts',
+        'Spinach',
+        'Carrots',
+        'Fried egg',
+        'Gochujang sauce'
+      ],
+      instructions: [
+        'Cook rice in rice cooker',
+        'Marinate beef in bulgogi sauce',
+        'Sauté vegetables separately',
+        'Fry egg sunny-side up',
+        'Assemble in bowl with rice',
+        'Top with egg and sauce'
+      ],
+      author: 'Maangchi',
+      rating: 4.9,
+      reviews: 34
+    },
+    {
+      img: 'images/paella.jpg',
+      title: 'Seafood Paella',
+      cuisine: 'Spanish',
+      cookTime: '55 mins',
+      diet: 'Pescatarian',
+      ingredients: [
+        '1.5 cups bomba rice',
+        '8 large shrimp',
+        '1 lb mussels',
+        '1 red bell pepper',
+        '1 tsp saffron',
+        '4 cups fish stock',
+        'Lemon wedges'
+      ],
+      instructions: [
+        'Toast saffron in warm stock',
+        'Sauté vegetables in paella pan',
+        'Add rice and coat with oil',
+        'Pour in saffron stock',
+        'Arrange seafood on top',
+        'Cook uncovered until socarrat forms'
+      ],
+      author: 'José Andrés',
+      rating: 4.8,
+      reviews: 31
+    },
+    {
+      img: 'images/curry.jpg',
+      title: 'Red Lentil Curry',
+      cuisine: 'Indian',
+      cookTime: '40 mins',
+      diet: 'Vegan',
+      ingredients: [
+        '1 cup red lentils',
+        '1 onion',
+        '3 garlic cloves',
+        '1 tbsp curry powder',
+        '1 can coconut milk',
+        '2 tomatoes',
+        'Fresh cilantro'
+      ],
+      instructions: [
+        'Rinse lentils until water runs clear',
+        'Sauté onions and garlic',
+        'Add spices and toast briefly',
+        'Stir in lentils and coconut milk',
+        'Simmer for 25 minutes',
+        'Garnish with cilantro and lime'
+      ],
+      author: 'Meera Sodha',
+      rating: 4.7,
+      reviews: 29
+    }
+  ]
+
+  function renderRecipes() {
+    const grid = document.getElementById('recipes-grid');
+    grid.innerHTML = '';
+
+    allRecipes.forEach(recipe => {
+      const card = document.createElement('div');
+      card.className = 'recipe-card bg-white rounded-xl border-t-4 border-[#FF6B6B] shadow-lg hover:shadow-2xl transition-all overflow-hidden';
+      card.innerHTML = `
+        <div class="w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden">
+          <img src="${recipe.img}" alt="${recipe.title}" class="w-full h-full object-cover" loading="lazy" />
+        </div>
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-2">${recipe.title}</h2>
+          <p class="text-sm text-gray-600 mb-1"><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+          <p class="text-sm text-gray-600 mb-1"><strong>Diet:</strong> ${recipe.diet}</p>
+          <p class="text-sm text-gray-600 mb-1"><strong>Cook Time:</strong> ${recipe.cookTime}</p>
+          <p class="text-sm text-yellow-500 mb-1">
+            ${'★'.repeat(Math.floor(recipe.rating))}${recipe.rating % 1 ? '½' : ''} (${recipe.reviews} reviews)
+          </p>
+          <button onclick='openModal(${JSON.stringify(recipe)})' class="mt-2 text-white bg-[#FF6B6B] px-4 py-1 rounded-xl hover:bg-[#ff4f4f] transition">View Recipe</button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function openModal(recipe) {
+    const modal = document.getElementById("recipe-modal");
+    const modalContent = document.getElementById("modal-content");
+
+    modalContent.innerHTML = `
+      <h2 class="text-2xl font-bold text-[#FF6B6B] mb-4">${recipe.title}</h2>
+      <div class="w-full aspect-[4/3] bg-gray-100 mb-4 rounded-md overflow-hidden flex items-center justify-center">
+        <img src="${recipe.img}" alt="${recipe.title}" class="w-full h-full object-cover" />
+      </div>
+      <p class="mb-2"><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+      <p class="mb-2"><strong>Diet:</strong> ${recipe.diet}</p>
+      <p class="mb-2"><strong>Cook Time:</strong> ${recipe.cookTime}</p>
+      <p class="mb-2"><strong>Rating:</strong> ${recipe.rating} (${recipe.reviews} reviews)</p>
+      <h3 class="font-semibold mt-4 mb-2">Ingredients</h3>
+      <ul class="list-disc list-inside mb-4">
+        ${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}
+      </ul>
+      <h3 class="font-semibold mb-2">Instructions</h3>
+      <ol class="list-decimal list-inside space-y-1">
+        ${recipe.instructions.map(step => `<li>${step}</li>`).join('')}
+      </ol>
+    `;
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("recipe-modal").style.display = "none";
+  }
+
+  // Initial rendering
+  renderRecipes();
+
+  // Hide modal on page load to prevent flash
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("recipe-modal").style.display = "none";
+  });
+  </script>
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Plate - Shop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tomato: 'var(--primary-red)'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-light text-dark">
+  <!-- Navigation -->
+  <nav class="fixed w-full bg-tomato z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
+      <div class="hidden md:flex gap-6 text-white">
+        <a href="shopping.html" class="font-semibold underline">Shopping</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+        <div class="relative">
+          <a href="#cart" class="hover:text-goldenyellow transition">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count" class="absolute -top-2 -right-3 bg-white text-tomato text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+          </a>
+        </div>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2">
+      <a href="shopping.html" class="block text-white py-1 font-semibold">Shopping</a>
+      <a href="recipes.html" class="block text-white py-1">Recipes</a>
+      <a href="about.html" class="block text-white py-1">About</a>
+      <a href="contact.html" class="block text-white py-1">Contact</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
+      <div class="block text-white py-1">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="mobile-cart-count" class="ml-2">0</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="max-w-7xl mx-auto px-4 py-8 pt-24">
+    <h1 class="text-4xl font-bold text-tomato text-center mb-8">Home Plate Kitchen Shop</h1>
+
+    <!-- Filter Bar -->
+    <div id="filter-bar" class="bg-white rounded-xl p-6 shadow-md mb-8">
+      <div class="max-w-xl mx-auto relative">
+        <input 
+          type="text" 
+          id="search" 
+          placeholder="Search for a product..." 
+          class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-mint transition"
+          oninput="applyFilters()"
+          aria-label="Search for a product"
+        >
+        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+      </div>
+      <div class="flex flex-wrap gap-2 justify-center mt-4">
+        <button onclick="filterCategory('All', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition" id="filter-all">All</button>
+        <button onclick="filterCategory('Pots', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Pots</button>
+        <button onclick="filterCategory('Utensils', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Utensils</button>
+        <button onclick="filterCategory('Tools', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Tools</button>
+        <button onclick="filterCategory('Bakeware', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Bakeware</button>
+        <button onclick="filterCategory('Storage', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Storage</button>
+        <button onclick="filterCategory('Appliances', event)" class="px-4 py-2 bg-tomato text-white rounded-full hover:bg-carrot transition">Appliances</button>
+      </div>
+    </div>
+
+    <!-- Sort Dropdown -->
+    <div class="text-center mb-8">
+      <select onchange="sortProducts(this.value)" class="border px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-mint" aria-label="Sort products">
+        <option value="default">Sort By</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name">Name (A–Z)</option>
+      </select>
+    </div>
+
+    <!-- Product Grid & Cart Layout -->
+    <div class="grid lg:grid-cols-4 gap-8">
+      <!-- Products Grid -->
+      <div class="lg:col-span-3">
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+      </div>
+      <!-- Cart Section -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl shadow-xl p-6 sticky top-24">
+          <h2 class="text-2xl font-bold text-tomato mb-4">Your Cart</h2>
+          <ul id="cart-items" class="space-y-3 mb-4 max-h-96 overflow-y-auto pr-2"></ul>
+          <div class="flex justify-between items-center pt-4 border-t border-gray-200">
+            <p class="text-lg font-semibold">Total: $<span id="total">0.00</span></p>
+            <button onclick="checkout()" class="bg-sage-green hover:bg-[#6e8c5a] text-white px-4 py-2 rounded-full transition transform hover:scale-105 disabled:opacity-50" aria-label="Checkout" id="checkout-btn">
+              Checkout
+            </button>
+          </div>
+          <div class="flex justify-end mt-4">
+            <a href="checkout.html" class="bg-[var(--primary-red)] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#CC7357] transition shadow">
+              Checkout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6 relative">
+      <button id="close-modal" class="absolute top-2 right-2 text-gray-400 hover:text-tomato text-2xl">&times;</button>
+      <div class="w-full aspect-[4/3] bg-gray-100 mb-4 rounded-lg overflow-hidden flex items-center justify-center">
+        <img id="modal-image" src="" alt="" loading="lazy" class="w-full h-full object-cover" />
+      </div>
+      <h2 id="modal-name" class="text-2xl font-bold mb-2"></h2>
+      <p id="modal-category" class="text-sm text-gray-500 mb-2"></p>
+      <p id="modal-price" class="text-xl font-semibold text-basil mb-4"></p>
+      <button id="modal-add-cart" class="w-full bg-tomato text-white py-2 rounded-full hover:bg-carrot transition">
+        <i class="fas fa-plus-circle mr-2"></i>Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <!-- JS Script -->
+  <script>
+    const products = [
+        { id: 1, name: 'Cast Iron Skillet', price: 39.99, category: 'Pots', image: 'images/skillet.jpg' },
+        { id: 2, name: 'Wooden Spoon Set', price: 14.99, category: 'Utensils', image: 'images/wooden-spoon.jpg' },
+        { id: 3, name: 'Measuring Cups', price: 19.99, category: 'Tools', image: 'images/measuring-cups.jpg' },
+        { id: 4, name: 'Baking Sheet', price: 12.99, category: 'Bakeware', image: 'images/baking-sheet.jpg' },
+        { id: 5, name: 'Stainless Steel Pot', price: 49.99, category: 'Pots', image: 'images/steel-pot.jpg' },
+        { id: 6, name: 'Silicone Spatula', price: 9.99, category: 'Utensils', image: 'images/silicone-spatula.jpg' },
+        { id: 7, name: 'Mixing Bowl Set', price: 29.99, category: 'Tools', image: 'images/mixing-bowl.jpg' },
+        { id: 8, name: 'Cake Pan', price: 15.99, category: 'Bakeware', image: 'images/cake-pan.jpg' },
+        { id: 9, name: 'Copper Pan', price: 59.99, category: 'Pots', image: 'images/copper-pan.jpg' },
+        { id: 10, name: 'Dutch Oven', price: 89.99, category: 'Pots', image: 'images/dutch-oven.jpg' },
+        { id: 11, name: 'Chef Knife Set', price: 69.99, category: 'Tools', image: 'images/knife-set.jpg' },
+        { id: 12, name: 'Muffin Tin', price: 18.99, category: 'Bakeware', image: 'images/muffin-tin.jpg' },
+        { id: 13, name: 'Kitchen Scale', price: 24.99, category: 'Tools', image: 'images/kitchen-scale.jpg' },
+        { id: 14, name: 'Serving Tongs', price: 12.99, category: 'Utensils', image: 'images/serving-tongs.jpg' },
+        { id: 15, name: 'Cutting Board Set', price: 34.99, category: 'Tools', image: 'images/cutting-board.jpg' },
+        { id: 16, name: 'Mason Jar Set', price: 22.99, category: 'Storage', image: 'images/mason-jar.jpg' },
+        { id: 17, name: 'Electric Kettle', price: 39.99, category: 'Appliances', image: 'images/electric-kettle.jpg' },
+        { id: 18, name: 'Salad Spinner', price: 19.99, category: 'Tools', image: 'images/salad-spinner.jpg' },
+        { id: 19, name: 'Herb Scissors', price: 14.99, category: 'Utensils', image: 'images/herb-scissors.jpg' },
+        { id: 20, name: 'Bread Knife', price: 29.99, category: 'Tools', image: 'images/bread-knife.jpg' }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('homeplate-cart')) || [];
+    let currentCategory = 'All';
+
+    function renderProducts(filteredProducts = products) {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'bg-white rounded-xl shadow-md p-4 flex flex-col hover:shadow-lg transition-shadow duration-200';
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" loading="lazy" class="w-full aspect-[4/3] object-cover rounded-lg bg-gray-100 shadow-sm transition-transform duration-200 hover:scale-105">
+          <div class="p-4 flex-1 flex flex-col">
+            <h3 class="text-lg font-semibold text-dark mb-1">${product.name}</h3>
+            <p class="text-basil font-bold text-xl mb-2">$${product.price.toFixed(2)}</p>
+            <div class="flex gap-2 mt-auto">
+              <!-- Add to Cart Button (thinner) -->
+              <button 
+                onclick="addToCart(${product.id})"
+                class="flex-1 flex items-center justify-center gap-2 bg-tomato text-white rounded-full py-2 px-3 text-sm font-bold shadow transition hover:bg-[var(--primary-red)] focus:outline-none focus:ring-2 focus:ring-[var(--primary-red)]"
+                aria-label="Add ${product.name} to cart"
+                style="min-width: 0;"
+              >
+                <span class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 group-hover:bg-white/30 transition">
+                  <i class="fas fa-shopping-cart text-base"></i>
+                </span>
+                <span>Add</span>
+              </button>
+
+              <!-- View Button (thinner) -->
+              <button 
+                onclick="viewDetails(${product.id})"
+                style="background-color: #8AAA79; border: 2px solid #8AAA79; min-width: 0;"
+                class="flex flex-1 items-center justify-center gap-2 text-white rounded-full py-2 px-3 text-sm font-semibold shadow transition focus:outline-none focus:ring-2 focus:ring-[#8AAA79]"
+                aria-label="View details for ${product.name}"
+              >
+                <span class="flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
+                  <i class="fas fa-eye text-base"></i>
+                </span>
+                <span>View</span>
+              </button>
+            </div>
+          </div>
+        `;
+        productList.appendChild(productCard);
+      });
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cart-items');
+      const totalSpan = document.getElementById('total');
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<li class="text-gray-400 text-center">Your cart is empty.</li>';
+      } else {
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+          const li = document.createElement('li');
+          li.className = "flex items-center justify-between bg-light rounded-lg px-3 py-2";
+          li.innerHTML = `
+            <span class="font-semibold">${item.name} <span class="text-xs text-gray-500">x${item.quantity}</span></span>
+            <span class="font-semibold">$${(item.price * item.quantity).toFixed(2)}</span>
+            <button onclick="removeFromCart(${item.id})" class="text-tomato hover:text-carrot ml-2" title="Remove">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+          cartItems.appendChild(li);
+        });
+      }
+      totalSpan.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartCount();
+      localStorage.setItem('homeplate-cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+      updateCartCount();
+      localStorage.setItem('homeplate-cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = count;
+      document.getElementById('mobile-cart-count').textContent = count;
+      document.getElementById('checkout-btn').disabled = count === 0;
+    }
+
+    function filterCategory(category, event) {
+      currentCategory = category;
+      document.querySelectorAll('#filter-bar button').forEach(btn => {
+        btn.classList.remove('bg-basil', 'ring-2', 'ring-white');
+      });
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('bg-basil', 'ring-2', 'ring-white');
+      }
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const searchTerm = document.getElementById("search").value.toLowerCase();
+      const filtered = products.filter(p => {
+        const matchesCategory = currentCategory === 'All' || p.category === currentCategory;
+        const matchesSearch = p.name.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+      renderProducts(filtered);
+      
+      // Preserve sort order
+      const sortSelect = document.querySelector('select');
+      if(sortSelect.value !== 'default') {
+        sortProducts(sortSelect.value);
+      }
+    }
+
+    function sortProducts(sortType) {
+      let filtered = products.filter(p => {
+        const matchesCategory = currentCategory === 'All' || p.category === currentCategory;
+        const searchTerm = document.getElementById("search").value.toLowerCase();
+        const matchesSearch = p.name.toLowerCase().includes(searchTerm);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (sortType === "price-asc") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortType === "price-desc") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortType === "name") {
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      renderProducts(filtered);
+    }
+
+    function checkout() {
+      localStorage.setItem('homeplate-cart', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    }
+
+    function loadCart() {
+      updateCartCount();
+      renderCart();
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      loadCart();
+      renderProducts();
+      filterCategory('All');
+    });
+
+    // Mobile menu toggle
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('product-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalName = document.getElementById('modal-name');
+    const modalCategory = document.getElementById('modal-category');
+    const modalPrice = document.getElementById('modal-price');
+    const modalAddCart = document.getElementById('modal-add-cart');
+
+    function viewDetails(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      document.getElementById('modal-image').src = product.image;
+      document.getElementById('modal-image').alt = product.name;
+      document.getElementById('modal-name').textContent = product.name;
+      document.getElementById('modal-category').textContent = "Category: " + product.category;
+      document.getElementById('modal-price').textContent = "$" + product.price.toFixed(2);
+
+      // Set up Add to Cart button in modal
+      const addBtn = document.getElementById('modal-add-cart');
+      addBtn.onclick = function() {
+        addToCart(productId);
+        closeModal();
+      };
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    // Modal close event
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('close-modal').onclick = closeModal;
+      // Optional: close modal when clicking outside the modal content
+      document.getElementById('product-modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Plate - Rustic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tomato: '#E63946'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --primary-red: #E63946;
+      --sage-green: #8AAA79;
+      --warm-cream: #F4F0E8;
+    }
+    * {
+      scroll-behavior: smooth;
+    }
+    .parallax {
+      background-image: url('https://images.unsplash.com/photo-1493770348161-369560ae357d');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    #trending-scroll {
+      animation: slide 40s linear infinite;
+      width: max-content;
+    }
+    #trending-scroll:hover {
+      animation-play-state: paused;
+    }
+    .bg-cream { background-color: #F4F0E8; }
+    .text-sage { color: #8AAA79; }
+    .border-terracotta { border-color: #CC7357; }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navigation -->
+  <nav class="fixed w-full bg-tomato z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
+      <div class="hidden md:flex gap-6 text-white">
+        <a href="shopping.html">Shopping</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2">
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+      <a href="recipes.html" class="block text-white py-1">Recipes</a>
+      <a href="about.html" class="block text-white py-1">About</a>
+      <a href="contact.html" class="block text-white py-1">Contact</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="parallax h-screen flex flex-col justify-center items-center text-white text-center px-4 pt-24">
+    <div class="bg-black bg-opacity-50 p-8 rounded-lg">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Home Plate</h1>
+      <p class="text-lg mb-2">Discover delicious recipes, meal plans, and shopping lists all in one place.</p>
+      <p>“From our plate to yours.” Culinary inspiration, made simple.</p>
+    </div>
+  </header>
+
+  <!-- Mission Section -->
+  <section class="max-w-5xl mx-auto px-4 mt-10 bg-cream rounded-lg shadow">
+    <h2 class="text-3xl text-center font-bold mb-2" style="color: var(--primary-red);">Our Mission</h2>
+    <p class="text-center text-lg text-sage mb-6">
+      At Home Plate, our mission is to make home cooking joyful, accessible, and inspiring for everyone.<br>
+      We believe that food brings people together, and every meal is an opportunity to nourish both body and soul.
+    </p>
+    <div class="w-full md:w-3/4 mx-auto">
+      <ul class="list-disc list-inside text-gray-800 text-base space-y-4">
+        <li>
+          <span class="font-semibold" style="color: var(--primary-red);">Curated Recipes:</span>
+          Explore a world of flavors with easy, chef-tested recipes for every skill level.
+        </li>
+        <li>
+          <span class="font-semibold" style="color: var(--primary-red);">Smart Shopping:</span>
+          Build and manage your shopping list with a single click, and never forget an ingredient again.
+        </li>
+        <li>
+          <span class="font-semibold" style="color: var(--primary-red);">Meal Planning:</span>
+          Plan your week with customizable meal plans and save time, money, and stress.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Information/Video Section -->
+  <section class="max-w-5xl mx-auto px-4 mt-10">
+    <div class="relative w-full pt-[56.25%] rounded-xl overflow-hidden">
+      <video 
+        autoplay 
+        loop 
+        muted 
+        playsinline 
+        controls 
+        poster="images/video-poster.jpg"
+        class="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
+        aria-label="Home Plate Introduction Video"
+        loading="lazy"
+      >
+        <source src="Video/9cd8d30f5e284b5e48be4ac2490d0c4a.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- Trending Now -->
+  <section class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-3xl text-center font-bold mb-6 text-tomato">Trending Now</h2>
+    <div class="relative overflow-hidden">
+      <div id="trending-scroll" class="flex gap-6 pb-4 scrollbar-hide">
+        <!-- Trending items -->
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/Spicy-Penne-Pasta_-done.png" alt="Pasta" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Pasta Perfection</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/sushi-rolls.jpg" alt="Sushi" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Fresh Sushi Rolls</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/juicy-burgers.jpg" alt="Burger" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Juicy Burgers</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/grilled-salmon.jpg" alt="Salmon" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Grilled Salmon</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/vegan-bowl.jpg" alt="Vegan Bowl" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Power Vegan Bowl</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/tiramisu.jpg" alt="Dessert" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Classic Tiramisu</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/tacos.jpg" alt="Tacos" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Street Tacos</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/ramen.jpg" alt="Ramen" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Spicy Ramen</h4>
+        </div>
+        <!-- Duplicated items for seamless loop -->
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/Spicy-Penne-Pasta_-done.png" alt="Pasta" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Pasta Perfection</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/sushi-rolls.jpg" alt="Sushi" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Fresh Sushi Rolls</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/juicy-burgers.jpg" alt="Burger" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Juicy Burgers</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/grilled-salmon.jpg" alt="Salmon" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Grilled Salmon</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/vegan-bowl.jpg" alt="Vegan Bowl" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Power Vegan Bowl</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/tiramisu.jpg" alt="Dessert" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Classic Tiramisu</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/tacos.jpg" alt="Tacos" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Street Tacos</h4>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-lg hover:scale-105 transition-transform flex-shrink-0 min-w-[300px]">
+          <img src="images/ramen.jpg" alt="Ramen" class="w-full h-48 object-cover rounded"/>
+          <h4 class="mt-2 font-semibold text-tomato">Spicy Ramen</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chef of the Month -->
+  <section class="max-w-5xl mx-auto px-4 mt-20 text-center">
+    <h2 class="text-3xl font-bold mb-4 text-tomato">Chef of the Month</h2>
+    <div class="bg-white shadow p-6 rounded-lg">
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e" alt="Chef Sophia Ramirez" class="mx-auto w-40 h-40 rounded-full object-cover mb-4"/>
+      <h3 class="text-xl font-semibold text-tomato">🌟 Sophia Ramirez</h3>
+      <p class="text-gray-700">“Bringing fusion flavors and authentic traditions to life.”</p>
+    </div>
+  </section>
+
+  <!-- Cooking Tips Section -->
+  <section class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-3xl text-center font-bold mb-6 text-tomato">👨‍🍳 Handy Cooking Tips</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition duration-300 border-l-4 border-tomato">
+        <h3 class="text-xl font-semibold mb-2 text-tomato">🔪 Keep Your Knives Sharp</h3>
+        <p class="text-gray-800">Dull knives are more dangerous than sharp ones. Sharpen your knives regularly for safer, cleaner cuts.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition duration-300 border-l-4 border-tomato">
+        <h3 class="text-xl font-semibold mb-2 text-tomato">🧂 Season as You Go</h3>
+        <p class="text-gray-800">Add salt gradually during cooking, not just at the end. It builds layers of flavor and better taste balance.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition duration-300 border-l-4 border-tomato">
+        <h3 class="text-xl font-semibold mb-2 text-tomato">🔥 Let Meat Rest</h3>
+        <p class="text-gray-800">After cooking, let meat rest for a few minutes. This allows juices to redistribute, keeping it tender and moist.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup Section -->
+  <section class="max-w-2xl mx-auto px-4 mt-20">
+    <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+      <h2 class="text-2xl font-bold text-tomato mb-2">Subscribe to Our Newsletter</h2>
+      <p class="mb-4 text-gray-800">Subscribe for weekly recipes, kitchen tips, and exclusive offers.</p>
+      <form class="flex flex-col sm:flex-row gap-3 justify-center items-center" aria-label="Newsletter Signup">
+        <input type="email" placeholder="Your email address" required aria-label="Email address" class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tomato w-full sm:w-auto" />
+        <button type="submit" class="bg-tomato hover:bg-red-700 text-white px-6 py-2 rounded-full font-semibold transition" aria-label="Subscribe to newsletter">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Accessibility & Performance Improvements -->
+  <script>
+    // Lazy load all images
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('img').forEach(img => {
+        img.setAttribute('loading', 'lazy');
+      });
+    });
+  </script>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to top"
+    class="fixed bottom-6 right-6 z-50 bg-tomato hover:bg-red-700 text-white p-3 rounded-full shadow-lg transition hidden"
+    aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Social Media Footer -->
+  <footer class="bg-gray-900 text-white mt-20" role="contentinfo">
+    <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+      <p class="mb-4 md:mb-0">&copy; 2025 Home Plate. All rights reserved.</p>
+      <div class="flex space-x-4">
+        <a href="#" aria-label="Facebook" class="text-white hover:text-tomato text-2xl"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter" class="text-white hover:text-tomato text-2xl"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram" class="text-white hover:text-tomato text-2xl"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Pinterest" class="text-white hover:text-tomato text-2xl"><i class="fab fa-pinterest"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Modified trending script
+    const trendingScroll = document.getElementById('trending-scroll');
+    trendingScroll.addEventListener('mouseenter', () => {
+      trendingScroll.style.animationPlayState = 'paused';
+    });
+    trendingScroll.addEventListener('mouseleave', () => {
+      trendingScroll.style.animationPlayState = 'running';
+    });
+
+    // Mobile menu script
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Back to Top Button functionality
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.remove('hidden');
+      } else {
+        backToTopBtn.classList.add('hidden');
+      }
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+  </script>
+</body>
+</html>

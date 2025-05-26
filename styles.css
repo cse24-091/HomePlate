@@ -1,0 +1,58 @@
+/* Fade-in and slide animation */
+@keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Zoom card on hover */
+  .review-card:hover,
+  .trending-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* Button hover effect */
+  .cta-button {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Navbar entrance animation */
+  nav {
+    animation: fadeSlideIn 0.8s ease forwards;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  
+  /* Hero content fade-in */
+  .hero-content {
+    animation: fadeSlideIn 1.2s ease forwards;
+    opacity: 0;
+  }
+  
+  /* Section titles animation */
+  .section-title {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeSlideIn 0.8s ease forwards;
+    animation-delay: 0.3s;
+  }
+  
+  :root {
+    --primary-red: #E63946;
+    --sage-green: #8AAA79;
+    --warm-cream: #F4F0E8;
+  }
+  .bg-cream { background-color: #F4F0E8; }
+  .text-sage { color: #8AAA79; }
+  .border-terracotta { border-color: #CC7357; }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cook's Corner - Home Plate</title>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" defer>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-ivory text-charcoal min-h-screen">
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 shadow-md bg-apricot" style="background-color: var(--apricot-orange);">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
+      <div class="hidden md:flex gap-6 text-white">
+        <a href="shopping.html">Shopping</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html">Blog</a>
+        <a href="cook'scorner.html" class="font-semibold underline">Cook's Corner</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-4 py-2 bg-apricot" style="background-color: var(--apricot-orange);">
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+      <a href="recipes.html" class="block text-white py-1">Recipes</a>
+      <a href="about.html" class="block text-white py-1">About</a>
+      <a href="contact.html" class="block text-white py-1">Contact</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
+      <a href="cook'scorner.html" class="block text-white py-1 font-semibold">Cook's Corner</a>
+    </div>
+  </nav>
+
+  <section class="bg-ivory py-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-12 mt-24">
+        <h1 class="text-4xl font-bold mb-4 flex items-center justify-center">
+          <i class="fas fa-utensils mr-3 text-apricot"></i>
+          Cook's Corner
+        </h1>
+        <p class="text-lg text-slate">
+          Where home cooks become kitchen rockstars
+        </p>
+        <button id="share-btn" class="mt-6 bg-apricot text-white px-8 py-3 rounded-lg hover:bg-[#ff6333] transition font-semibold">
+          Share Your Recipe <i class="fas fa-plus ml-2"></i>
+        </button>
+      </div>
+
+      <!-- Share Recipe Modal -->
+      <div id="share-modal" class="fixed inset-0 bg-black/40 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 max-w-md w-full relative">
+          <button onclick="closeShareModal()" class="absolute top-4 right-4 text-2xl text-gray-400 hover:text-apricot">&times;</button>
+          <h2 class="text-2xl font-bold mb-4 text-apricot">Share Your Recipe</h2>
+          <form id="share-recipe-form" class="space-y-4">
+            <div>
+              <label for="user-recipe-title" class="block font-semibold mb-1 text-charcoal">Recipe Title</label>
+              <input type="text" id="user-recipe-title" name="title" required class="w-full border rounded px-3 py-2" placeholder="e.g. Grandma's Apple Pie">
+            </div>
+            <div>
+              <label for="user-recipe-ingredients" class="block font-semibold mb-1 text-charcoal">Ingredients</label>
+              <textarea id="user-recipe-ingredients" name="ingredients" required class="w-full border rounded px-3 py-2" rows="3" placeholder="List ingredients, separated by commas"></textarea>
+            </div>
+            <div>
+              <label for="user-recipe-instructions" class="block font-semibold mb-1 text-charcoal">Instructions</label>
+              <textarea id="user-recipe-instructions" name="instructions" required class="w-full border rounded px-3 py-2" rows="3" placeholder="Step-by-step instructions"></textarea>
+            </div>
+            <button type="submit" class="bg-apricot text-white px-6 py-2 rounded-full font-semibold hover:bg-[#ff6333] transition">Share Recipe</button>
+            <div id="share-recipe-success" class="text-green-600 font-semibold mt-2 hidden">Thank you for sharing your recipe!</div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Recipe Feed -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Example Recipe Card -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+          <img src="recipe-image.jpg" alt="Family Lasagna" loading="lazy" class="h-48 w-full object-cover">
+          <div class="p-6">
+            <div class="flex items-center mb-3">
+              <img src="user-avatar.jpg" alt="User avatar" loading="lazy" class="w-10 h-10 rounded-full mr-3">
+              <div>
+                <h3 class="font-bold text-charcoal">Grandma's Lasagna</h3>
+                <p class="text-sm text-slate">@ItalianChef123</p>
+              </div>
+            </div>
+            <div class="flex space-x-4 mb-4">
+              <span class="bg-apricot/10 text-apricot px-2 py-1 rounded-full text-sm">Italian</span>
+              <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">Vegetarian</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <i class="fas fa-star text-mustard mr-1"></i>
+                <span class="font-medium text-charcoal">4.8</span>
+                <span class="text-slate ml-2">(142)</span>
+              </div>
+              <div class="flex space-x-3 text-slate">
+                <button class="hover:text-apricot">
+                  <i class="far fa-heart"></i> 56
+                </button>
+                <button class="hover:text-apricot">
+                  <i class="far fa-comment"></i> 23
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Add more recipe cards here as needed -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Share Recipe Modal logic
+    const shareBtn = document.getElementById('share-btn');
+    const shareModal = document.getElementById('share-modal');
+    function closeShareModal() {
+      shareModal.classList.add('hidden');
+    }
+    shareBtn.addEventListener('click', () => {
+      shareModal.classList.remove('hidden');
+    });
+
+    document.getElementById('share-recipe-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('share-recipe-success').classList.remove('hidden');
+      this.reset();
+      setTimeout(() => {
+        document.getElementById('share-recipe-success').classList.add('hidden');
+        closeShareModal();
+      }, 2500);
+    });
+  </script>
+</body>
+</html>

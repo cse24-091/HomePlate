@@ -1,0 +1,193 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Home Plate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-SzlrxWriC3wG3h8E1Qf8asG9R1Z9BvvZ3zX+GkWcJfqKpGzYj69NqgV+FQ9W+rVyE8zzhUHdZ5oU1BcN+Gp8Kw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 shadow-md" style="background-color: var(--primary-red);">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
+      <div class="hidden md:flex gap-6 text-white">
+        <a href="shopping.html">Shopping</a>
+        <a href="recipes.html">Recipes</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="blog.html" class="font-semibold underline">Blog</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-white text-2xl">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-4 py-2" style="background-color: var(--primary-red);">
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+      <a href="recipes.html" class="block text-white py-1">Recipes</a>
+      <a href="about.html" class="block text-white py-1">About</a>
+      <a href="contact.html" class="block text-white py-1">Contact</a>
+      <a href="blog.html" class="block text-white py-1 font-semibold">Blog</a>
+    </div>
+  </nav>
+
+  
+
+  <main class="max-w-6xl mx-auto px-4 pt-10 pb-20">
+    <!-- Blog Header -->
+    <section class="text-center mb-10">
+      <h1 class="text-4xl font-bold mb-4" style="color: var(--primary-red);">Home Plate Blog</h1>
+      <p class="text-lg text-gray-600">Your daily dose of culinary tips, trends, and inspiration.</p>
+    </section>
+
+    <!-- Tags -->
+    <div class="flex flex-row justify-start items-center mb-8 space-x-2">
+      <button class="px-3 py-1 rounded-full" style="background: #fde2e4; color: var(--primary-red);">Vegan</button>
+      <button class="px-3 py-1 rounded-full bg-green-200 text-green-700 hover:bg-green-300">Quick Meals</button>
+      <button class="px-3 py-1 rounded-full bg-blue-200 text-blue-700 hover:bg-blue-300">Baking</button>
+    </div>
+
+    <!-- Blog Posts Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Blog 1 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog1.jpg" alt="Blog 1" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">10 Quick Dinners for Busy Weeknights</h3>
+        <p class="text-sm text-gray-600 mb-2">by Jamie Oliver</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog1-preview">No time to cook? These quick recipes have you covered in under 30 minutes!</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog1')">Read more</button>
+        <p id="blog1-full" class="text-gray-700 text-sm mt-4 hidden">Cooking can be quick and easy! Here are ten dinner ideas that require minimal ingredients, yet deliver maximum flavor. Whether you're in the mood for pasta, stir-fry, or a hearty salad, these recipes will save your weeknight dinners.</p>
+      </div>
+
+      <!-- Blog 2 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog2.jpg" alt="Blog 2" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">Top 5 Baking Mistakes and How to Avoid Them</h3>
+        <p class="text-sm text-gray-600 mb-2">by Mary Berry</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog2-preview">From sunken cakes to burned crusts — fix your baking game with these tips.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog2')">Read more</button>
+        <p id="blog2-full" class="text-gray-700 text-sm mt-4 hidden">Baking is an art, and like any art, it's important to avoid common mistakes. This blog will guide you through the most frequent baking issues, such as overmixing, underbaking, and miscalculating temperatures, so you can master your cakes and pastries.</p>
+      </div>
+
+      <!-- Blog 3 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog3.jpg" alt="Blog 3" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">Plant-Based Recipes That Even Meat-Lovers Enjoy</h3>
+        <p class="text-sm text-gray-600 mb-2">by Tabitha Brown</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog3-preview">Try these delicious dishes that make going plant-based easy and tasty.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog3')">Read more</button>
+        <p id="blog3-full" class="text-gray-700 text-sm mt-4 hidden">Plant-based meals are packed with flavor and nutrition! In this blog, we'll explore hearty, plant-based recipes that will satisfy even the most devout meat lovers. These dishes are easy to prepare and perfect for family dinners or casual gatherings.</p>
+      </div>
+
+      <!-- Blog 4 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog4.jpg" alt="Blog 4" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">How to Make the Perfect Homemade Pizza</h3>
+        <p class="text-sm text-gray-600 mb-2">by Giuseppe Rossi</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog4-preview">Master the art of pizza-making with this step-by-step guide.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog4')">Read more</button>
+        <p id="blog4-full" class="text-gray-700 text-sm mt-4 hidden">Homemade pizza is a family favorite, and it's easier than you think. From making the dough to selecting the perfect toppings, this guide covers everything you need to make pizza night a success.</p>
+      </div>
+
+      <!-- Blog 5 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog5.jpg" alt="Blog 5" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">The Ultimate Guide to Meal Prep for the Week</h3>
+        <p class="text-sm text-gray-600 mb-2">by Rachel Green</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog5-preview">Save time and eat healthy all week long with these meal prep tips.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog5')">Read more</button>
+        <p id="blog5-full" class="text-gray-700 text-sm mt-4 hidden">Meal prepping is a game-changer for busy people. This blog walks you through the best strategies for prepping a week's worth of meals in one go, from breakfast to dinner, so you can enjoy healthy meals without the stress.</p>
+      </div>
+
+      <!-- Blog 6 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog6.jpg" alt="Blog 6" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">5 Simple Desserts You Can Make in 10 Minutes</h3>
+        <p class="text-sm text-gray-600 mb-2">by Nigella Lawson</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog6-preview">Craving something sweet but short on time? Try these easy desserts!</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog6')">Read more</button>
+        <p id="blog6-full" class="text-gray-700 text-sm mt-4 hidden">Need a quick sweet fix? These five desserts can be whipped up in under ten minutes, perfect for when you're in a rush but still want something indulgent.</p>
+      </div>
+
+      <!-- Blog 7 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog7.jpg" alt="Blog 7" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">Cooking for Beginners: The Essential Tools</h3>
+        <p class="text-sm text-gray-600 mb-2">by Gordon Ramsay</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog7-preview">Get started in the kitchen with these must-have cooking tools.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog7')">Read more</button>
+        <p id="blog7-full" class="text-gray-700 text-sm mt-4 hidden">Whether you're a novice cook or looking to upgrade your kitchen gear, this blog outlines the tools every home chef should have to make cooking easier and more enjoyable.</p>
+      </div>
+
+      <!-- Blog 8 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog8.jpg" alt="Blog 8" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">Cooking with Kids: Fun and Easy Recipes</h3>
+        <p class="text-sm text-gray-600 mb-2">by Jamie Oliver</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog8-preview">Get your little ones involved with these kid-friendly recipes.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog8')">Read more</button>
+        <p id="blog8-full" class="text-gray-700 text-sm mt-4 hidden">Cooking with kids can be a fun and educational experience. These recipes are easy for children to help with and perfect for introducing them to the kitchen.</p>
+      </div>
+
+      <!-- Blog 9 -->
+      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg transition-all">
+        <img src="images/blog9.jpg" alt="Blog 9" class="rounded-lg mb-4 w-full h-40 sm:h-48 md:h-56 object-cover"/>
+        <h3 class="text-xl font-semibold mb-2" style="color: var(--primary-red);">How to Make Perfect Pancakes Every Time</h3>
+        <p class="text-sm text-gray-600 mb-2">by Rachel Green</p>
+        <p class="text-gray-700 text-sm mb-4" id="blog9-preview">Fluffy, delicious pancakes made easy with these tips.</p>
+        <button class="hover:underline" style="color: #4169e1;" onclick="readMore('blog9')">Read more</button>
+        <p id="blog9-full" class="text-gray-700 text-sm mt-4 hidden">Pancakes are a breakfast classic, and getting them just right can make your morning. Follow these simple steps for perfectly fluffy, golden pancakes every time.</p>
+      </div>
+    </div>
+
+    <script>
+      function readMore(blogId) {
+        const preview = document.getElementById(`${blogId}-preview`);
+        const fullContent = document.getElementById(`${blogId}-full`);
+        if (fullContent.classList.contains('hidden')) {
+          fullContent.classList.remove('hidden');
+          preview.classList.add('hidden');
+        } else {
+          fullContent.classList.add('hidden');
+          preview.classList.remove('hidden');
+        }
+      }
+    </script>
+  
+    <!-- ✅ Social Media Footer -->
+    <footer class="bg-[#2D2D2D] text-white mt-20">
+      <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="mb-4 md:mb-0">&copy; 2025 Home Plate. All rights reserved.</p>
+        <div class="flex space-x-6">
+          <a href="#" aria-label="Facebook" class="text-white hover:text-[#E63946] transition duration-300 text-2xl">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" aria-label="Twitter" class="text-white hover:text-[#E63946] transition duration-300 text-2xl">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" aria-label="Instagram" class="text-white hover:text-[#E63946] transition duration-300 text-2xl">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" aria-label="Pinterest" class="text-white hover:text-[#E63946] transition duration-300 text-2xl">
+            <i class="fab fa-pinterest"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+  
+  </main>
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', function() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
