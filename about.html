@@ -2,289 +2,314 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About - Home Plate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home Plate - Rustic</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tomato: '#E63946'
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-[#F7FFF7] text-[#2D2D2D]">
+<body class="bg-white text-gray-800">
   <!-- Navigation -->
-  <nav class="fixed w-full z-50 shadow-md" style="background-color: var(--primary-red);">
+  <nav class="fixed w-full z-50 shadow-md bg-tomato">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
-      <div class="hidden md:flex gap-6 text-white">
-        <a href="recipes.html">Recipes</a>
-        <a href="shopping.html">Shopping</a>
-        <a href="blog.html">Blog</a>
-        <a href="about.html" class="font-semibold underline">About</a>
-        <a href="contact.html">Contact</a>
+      <div class="flex-1 flex justify-end">
+        <div class="hidden md:flex gap-6 text-white">
+          <a href="recipes.html">Recipes</a>
+          <a href="shopping.html">Shopping</a>
+          <a href="blog.html">Blog</a>
+          <a href="about.html" class="font-semibold underline">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
       </div>
-      <button id="menu-btn" class="md:hidden text-white text-2xl">
+      <button id="menu-btn" class="md:hidden text-white text-2xl" aria-label="Open menu">
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2">
+    <!-- Mobile Dropdown Nav -->
+    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2 absolute w-full left-0 top-[64px] shadow-lg z-50">
       <a href="recipes.html" class="block text-white py-1">Recipes</a>
       <a href="shopping.html" class="block text-white py-1">Shopping</a>
       <a href="blog.html" class="block text-white py-1">Blog</a>
-      <a href="about.html" class="block text-white py-1 font-semibold">About</a>
+      <a href="about.html" class="block text-white py-1 font-semibold underline">About</a>
       <a href="contact.html" class="block text-white py-1">Contact</a>
     </div>
   </nav>
-
-  <!-- Inspirational Quote -->
-  <section class="text-center py-12 bg-gray-200 text-gray-800">
-    <blockquote class="text-2xl italic max-w-3xl mx-auto">
-      “Bringing people together, one plate at a time.”
-    </blockquote>
-  </section>
-
-  <!-- Fun Stats Section -->
-  <section class="bg-gray-100 py-16 px-4 text-center">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="text-4xl font-bold text-[#FF6B6B]">100K+</h3>
-        <p class="mt-2 text-lg">Recipes Viewed</p>
-      </div>
-      <div>
-        <h3 class="text-4xl font-bold text-[#FF6B6B]">15K+</h3>
-        <p class="mt-2 text-lg">Happy Home Cooks</p>
-      </div>
-      <div>
-        <h3 class="text-4xl font-bold text-[#FF6B6B]">120+</h3>
-        <p class="mt-2 text-lg">Countries Reached</p>
-      </div>
-      <div>
-        <h3 class="text-4xl font-bold text-[#FF6B6B]">1,200+</h3>
-        <p class="mt-2 text-lg">Community Shared Recipes</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- What is Home Plate -->
-  <section class="max-w-5xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold mb-6 text-center">What is Home Plate?</h2>
-    <p class="text-lg leading-relaxed text-center">
-      Home Plate is your all-in-one culinary companion — helping home cooks discover new recipes,
-      plan meals, shop smarter, and share the joy of cooking. Whether you're a seasoned chef or
-      just starting out, our community reviews, curated content, and fun challenges make every meal
-      a delightful experience.
-    </p>
-  </section>
-
-  <!-- Mission & Vision Section with Image -->
-  <section class="bg-cream py-16 px-4">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6" style="color: var(--primary-red);">Our Mission & Vision</h2>
-      <div class="flex flex-col items-center justify-center gap-8">
-        <div>
-          <p class="text-lg mb-4 text-sage">At Home Plate, our mission is to make home cooking accessible, joyful, and culturally rich for everyone, everywhere.</p>
-          <p class="text-lg text-sage">Our vision is a world where every kitchen is a hub of creativity, connection, and nourishment.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Image Gallery -->
-  <section class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="relative">
-        <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Cooking Moment</div>
-        <img src="images/gallery1.jpg" alt="Cooking Moment" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
-      </div>
-      <div class="relative">
-        <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Delicious Food</div>
-        <img src="images/gallery2.jpg" alt="Delicious Food" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
-      </div>
-      <div class="relative">
-        <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Community Cooking</div>
-        <img src="images/gallery3.jpg" alt="Community Cooking" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Suggestions Section -->
-  <section class="bg-gray-100 text-gray-800 py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6">Why People Love Home Plate</h2>
-      <ul class="text-lg space-y-4">
-        <li>Recipe suggestions tailored to your diet, time, and taste.</li>
-        <li>Save your favorite meals and create shopping lists effortlessly.</li>
-        <li>Community spotlights and chef recognition.</li>
-        <li>Discover inspiration daily with trending recipes, cooking tips, and monthly cook-offs.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section class="bg-white py-16 px-4">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-10">What Our Users Are Saying</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-gray-100 p-6 rounded shadow">
-          <p>"I’ve never enjoyed cooking this much. Home Plate made it fun again!"</p>
-          <p class="mt-4 font-semibold">— Priya S.</p>
-        </div>
-        <div class="bg-gray-100 p-6 rounded shadow">
-          <p>"The recipe suggestions are always spot on for my family. Love it!"</p>
-          <p class="mt-4 font-semibold">— Mark D.</p>
-        </div>
-        <div class="bg-gray-100 p-6 rounded shadow">
-          <p>"My kids and I explore new meals weekly. It's become our tradition."</p>
-          <p class="mt-4 font-semibold">— Leila W.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team Section -->
-  <section class="bg-white py-16 px-4">
-    <div class="max-w-6xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-10" style="color: var(--primary-red);">Meet the Team</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div>
-          <img src="images/team1-portrait.jpg" alt="Alex Rivera" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
-          <h3 class="font-semibold text-xl">Alex Rivera</h3>
-          <p class="text-sm text-gray-600">Founder & Head Chef</p>
-        </div>
-        <div>
-          <img src="images/team2-portrait.jpg" alt="Jordan Lee" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
-          <h3 class="font-semibold text-xl">Jordan Lee</h3>
-          <p class="text-sm text-gray-600">Tech Lead</p>
-        </div>
-        <div>
-          <img src="images/team3-portrait.jpg" alt="Morgan Smith" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
-          <h3 class="font-semibold text-xl">Morgan Smith</h3>
-          <p class="text-sm text-gray-600">Community Manager</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Timeline Section -->
-  <section class="bg-gray-100 py-16 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold mb-12 text-center">Our Journey</h2>
-      <ol class="relative border-l-4 border-[#FF6B6B] pl-6 space-y-10">
-        <li>
-          <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
-          <h3 class="text-xl font-semibold">2022</h3>
-          <p class="text-gray-700">Home Plate idea is born over a shared dinner.</p>
-        </li>
-        <li>
-          <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
-          <h3 class="text-xl font-semibold">2023</h3>
-          <p class="text-gray-700">Prototype built and first users onboarded.</p>
-        </li>
-        <li>
-          <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
-          <h3 class="text-xl font-semibold">2024</h3>
-          <p class="text-gray-700">Community Recipes go live and we host our first virtual cook-off event.</p>
-        </li>
-        <li>
-          <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
-          <h3 class="text-xl font-semibold">2025</h3>
-          <p class="text-gray-700">Launch of shopping and review features, plus our first Home Plate cookbook release.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Awards or Recognitions -->
-  <section class="bg-white py-12 px-4 text-center">
-    <h2 class="text-2xl font-bold mb-6">Awards & Recognitions</h2>
-    <div class="flex flex-wrap justify-center items-center gap-8">
-      <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Best Cooking Community 2024</div>
-      <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Top Food App 2023</div>
-      <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Editor's Choice</div>
-    </div>
-  </section>
-
-  <!-- FAQs Section -->
-  <section class="bg-gray-100 py-16 px-4">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
-      <div class="space-y-6">
-        <div>
-          <h3 class="font-semibold text-xl">Is Home Plate free to use?</h3>
-          <p>Yes! All core features are completely free for everyone to enjoy.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-xl">How do I contribute my own recipes?</h3>
-          <p>You can submit your recipes through our community portal after signing up.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-xl">Can I use Home Plate on mobile?</h3>
-          <p>Absolutely! Home Plate is fully responsive and works great on all devices.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-xl">How is my privacy protected?</h3>
-          <p>We never share your personal information and you control your privacy settings at all times.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-xl">What if I have dietary restrictions?</h3>
-          <p>Home Plate offers filters and suggestions for a wide range of diets and allergies.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Accessibility Statement -->
-  <section class="bg-white py-12 px-4 text-center text-sm text-gray-600">
-    <p class="mb-6">We are committed to making Home Plate accessible to all users. If you encounter any issues, please contact us at <a href="mailto:support@homeplate.com" class="text-[#FF6B6B] underline">support@homeplate.com</a>.</p>
-  </section>
-
-  <!-- Contact or Feedback Link Section -->
-  <section class="bg-gray-50 py-12 px-4 text-center">
-    <h2 class="text-2xl font-bold mb-4">Have Suggestions or Questions?</h2>
-    <p class="mb-6">We value your feedback! Reach out to us anytime with your ideas or questions.</p>
-    <a href="contact.html" class="inline-block bg-[#E63946] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#ff5252] transition mt-4">Contact Us</a>
-  </section>
-
-  <!-- Core Values Section WITHOUT Icons/Images -->
-  <section class="bg-white py-12 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-6">Our Core Values</h2>
-      <div class="grid md:grid-cols-4 gap-8">
-        <div>
-          <h3 class="font-semibold text-lg mb-2">Community</h3>
-          <p class="text-gray-600 text-sm">Bringing cooks together from all backgrounds.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg mb-2">Creativity</h3>
-          <p class="text-gray-600 text-sm">Encouraging new ideas and culinary adventures.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg mb-2">Inclusivity</h3>
-          <p class="text-gray-600 text-sm">Recipes and features for every diet and culture.</p>
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg mb-2">Sustainability</h3>
-          <p class="text-gray-600 text-sm">Promoting eco-friendly cooking and shopping.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <script>
-    // Mobile menu script
-    document.getElementById('menu-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-
-    // Back to Top Button functionality
-    const backToTopBtn = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTopBtn.classList.remove('hidden');
-      } else {
-        backToTopBtn.classList.add('hidden');
+    // Hamburger menu toggle for mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      var menuBtn = document.getElementById('menu-btn');
+      var mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
       }
-    });
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.addEventListener('click', function(e) {
+        if (
+          mobileMenu &&
+          !mobileMenu.classList.contains('hidden') &&
+          !menuBtn.contains(e.target) &&
+          !mobileMenu.contains(e.target)
+        ) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+      // Close menu when a link is clicked
+      Array.from(mobileMenu.querySelectorAll('a')).forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobileMenu.classList.add('hidden');
+        });
+      });
     });
   </script>
+  <main class="max-w-6xl mx-auto px-4 pt-10 pb-20">
+    <!-- Inspirational Quote -->
+    <section class="text-center py-12 bg-gray-200 text-gray-800">
+      <blockquote class="text-2xl italic max-w-3xl mx-auto">
+        “Bringing people together, one plate at a time.”
+      </blockquote>
+    </section>
+
+    <!-- Fun Stats Section -->
+    <section class="bg-gray-100 py-16 px-4 text-center">
+      <div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-4xl font-bold text-[#FF6B6B]">100K+</h3>
+          <p class="mt-2 text-lg">Recipes Viewed</p>
+        </div>
+        <div>
+          <h3 class="text-4xl font-bold text-[#FF6B6B]">15K+</h3>
+          <p class="mt-2 text-lg">Happy Home Cooks</p>
+        </div>
+        <div>
+          <h3 class="text-4xl font-bold text-[#FF6B6B]">120+</h3>
+          <p class="mt-2 text-lg">Countries Reached</p>
+        </div>
+        <div>
+          <h3 class="text-4xl font-bold text-[#FF6B6B]">1,200+</h3>
+          <p class="mt-2 text-lg">Community Shared Recipes</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is Home Plate -->
+    <section class="max-w-5xl mx-auto px-4 py-16">
+      <h2 class="text-3xl font-bold mb-6 text-center">What is Home Plate?</h2>
+      <p class="text-lg leading-relaxed text-center">
+        Home Plate is your all-in-one culinary companion — helping home cooks discover new recipes, plan meals, shop smarter, and share the joy of cooking. Whether you're a seasoned chef or just starting out, our community reviews, curated content, and fun challenges make every meal a delightful experience.
+      </p>
+    </section>
+
+    <!-- Mission & Vision Section with Image -->
+    <section class="bg-cream py-16 px-4">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6" style="color: var(--primary-red);">Our Mission & Vision</h2>
+        <div class="flex flex-col items-center justify-center gap-8">
+          <div>
+            <p class="text-lg mb-4 text-sage">At Home Plate, our mission is to make home cooking accessible, joyful, and culturally rich for everyone, everywhere.</p>
+            <p class="text-lg text-sage">Our vision is a world where every kitchen is a hub of creativity, connection, and nourishment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="relative">
+          <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Cooking Moment</div>
+          <img src="images/gallery1.jpg" alt="Cooking Moment" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
+        </div>
+        <div class="relative">
+          <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Delicious Food</div>
+          <img src="images/gallery2.jpg" alt="Delicious Food" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
+        </div>
+        <div class="relative">
+          <div class="mb-2 text-center font-bold text-xl" style="color: var(--primary-red);">Community Cooking</div>
+          <img src="images/gallery3.jpg" alt="Community Cooking" class="rounded shadow-md hover:scale-105 transition-transform duration-300 w-full h-80 object-cover" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Suggestions Section -->
+    <section class="bg-gray-100 text-gray-800 py-16 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6">Why People Love Home Plate</h2>
+        <ul class="text-lg space-y-4">
+          <li>Recipe suggestions tailored to your diet, time, and taste.</li>
+          <li>Save your favorite meals and create shopping lists effortlessly.</li>
+          <li>Community spotlights and chef recognition.</li>
+          <li>Discover inspiration daily with trending recipes, cooking tips, and monthly cook-offs.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="bg-white py-16 px-4">
+      <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10">What Our Users Are Saying</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-gray-100 p-6 rounded shadow">
+            <p>"I’ve never enjoyed cooking this much. Home Plate made it fun again!"</p>
+            <p class="mt-4 font-semibold">— Priya S.</p>
+          </div>
+          <div class="bg-gray-100 p-6 rounded shadow">
+            <p>"The recipe suggestions are always spot on for my family. Love it!"</p>
+            <p class="mt-4 font-semibold">— Mark D.</p>
+          </div>
+          <div class="bg-gray-100 p-6 rounded shadow">
+            <p>"My kids and I explore new meals weekly. It's become our tradition."</p>
+            <p class="mt-4 font-semibold">— Leila W.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="bg-white py-16 px-4">
+      <div class="max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-10" style="color: var(--primary-red);">Meet the Team</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <img src="images/team1-portrait.jpg" alt="Alex Rivera" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
+            <h3 class="font-semibold text-xl">Alex Rivera</h3>
+            <p class="text-sm text-gray-600">Founder & Head Chef</p>
+          </div>
+          <div>
+            <img src="images/team2-portrait.jpg" alt="Jordan Lee" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
+            <h3 class="font-semibold text-xl">Jordan Lee</h3>
+            <p class="text-sm text-gray-600">Tech Lead</p>
+          </div>
+          <div>
+            <img src="images/team3-portrait.jpg" alt="Morgan Smith" class="rounded-full w-32 h-32 mx-auto mb-4 object-cover object-center border-4 border-terracotta" />
+            <h3 class="font-semibold text-xl">Morgan Smith</h3>
+            <p class="text-sm text-gray-600">Community Manager</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="bg-gray-100 py-16 px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center">Our Journey</h2>
+        <ol class="relative border-l-4 border-[#FF6B6B] pl-6 space-y-10">
+          <li>
+            <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
+            <h3 class="text-xl font-semibold">2022</h3>
+            <p class="text-gray-700">Home Plate idea is born over a shared dinner.</p>
+          </li>
+          <li>
+            <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
+            <h3 class="text-xl font-semibold">2023</h3>
+            <p class="text-gray-700">Prototype built and first users onboarded.</p>
+          </li>
+          <li>
+            <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
+            <h3 class="text-xl font-semibold">2024</h3>
+            <p class="text-gray-700">Community Recipes go live and we host our first virtual cook-off event.</p>
+          </li>
+          <li>
+            <span class="absolute -left-3.5 w-7 h-7 bg-[#FF6B6B] rounded-full"></span>
+            <h3 class="text-xl font-semibold">2025</h3>
+            <p class="text-gray-700">Launch of shopping and review features, plus our first Home Plate cookbook release.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Awards or Recognitions -->
+    <section class="bg-white py-12 px-4 text-center">
+      <h2 class="text-2xl font-bold mb-6">Awards & Recognitions</h2>
+      <div class="flex flex-wrap justify-center items-center gap-8">
+        <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Best Cooking Community 2024</div>
+        <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Top Food App 2023</div>
+        <div class="bg-gray-100 rounded-full px-6 py-4 shadow text-lg font-semibold text-[#E63946]">Editor's Choice</div>
+      </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="bg-gray-100 py-16 px-4">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-semibold text-xl">Is Home Plate free to use?</h3>
+            <p>Yes! All core features are completely free for everyone to enjoy.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl">How do I contribute my own recipes?</h3>
+            <p>You can submit your recipes through our community portal after signing up.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl">Can I use Home Plate on mobile?</h3>
+            <p>Absolutely! Home Plate is fully responsive and works great on all devices.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl">How is my privacy protected?</h3>
+            <p>We never share your personal information and you control your privacy settings at all times.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-xl">What if I have dietary restrictions?</h3>
+            <p>Home Plate offers filters and suggestions for a wide range of diets and allergies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility Statement -->
+    <section class="bg-white py-12 px-4 text-center text-sm text-gray-600">
+      <p class="mb-6">
+        We are committed to making Home Plate accessible to all users. If you encounter any issues, please contact us at
+        <a href="mailto:support@homeplate.com" class="text-[#FF6B6B] underline">support@homeplate.com</a>.
+      </p>
+    </section>
+
+    <!-- Contact or Feedback Link Section -->
+    <section class="bg-gray-50 py-12 px-4 text-center">
+      <h2 class="text-2xl font-bold mb-4">Have Suggestions or Questions?</h2>
+      <p class="mb-6">We value your feedback! Reach out to us anytime with your ideas or questions.</p>
+      <a href="contact.html" class="inline-block bg-[#E63946] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#ff5252] transition mt-4">Contact Us</a>
+    </section>
+
+    <!-- Core Values Section WITHOUT Icons/Images -->
+    <section class="bg-white py-12 px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-6">Our Core Values</h2>
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="font-semibold text-lg mb-2">Community</h3>
+            <p class="text-gray-600 text-sm">Bringing cooks together from all backgrounds.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-2">Creativity</h3>
+            <p class="text-gray-600 text-sm">Encouraging new ideas and culinary adventures.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-2">Inclusivity</h3>
+            <p class="text-gray-600 text-sm">Recipes and features for every diet and culture.</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg mb-2">Sustainability</h3>
+            <p class="text-gray-600 text-sm">Promoting eco-friendly cooking and shopping.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
+
