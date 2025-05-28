@@ -7,6 +7,28 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .recipe-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    .recipe-modal .modal-content {
+      background: #fff;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      position: relative;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+  </style>
 </head>
 <body class="bg-[#F7FFF7] text-[#2D2D2D] min-h-screen">
   <!-- Navigation -->
@@ -14,24 +36,65 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
       <div class="hidden md:flex gap-6 text-white">
-        <a href="shopping.html">Shopping</a>
         <a href="recipes.html" class="font-semibold underline">Recipes</a>
+        <a href="shopping.html">Shopping</a>
+        <a href="blog.html">Blog</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
       </div>
       <button id="menu-btn" class="md:hidden text-white text-2xl">
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden px-4 py-2" style="background-color: var(--primary-red);">
+    <div id="mobile-menu" class="hidden md:hidden px-4 py-2 absolute w-full left-0 top-[64px]" style="background-color: var(--primary-red);">
+      <a href="recipes.html" class="block text-white py-1 font-semibold underline">Recipes</a>
       <a href="shopping.html" class="block text-white py-1">Shopping</a>
-      <a href="recipes.html" class="block text-white py-1 font-semibold">Recipes</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
       <a href="about.html" class="block text-white py-1">About</a>
       <a href="contact.html" class="block text-white py-1">Contact</a>
-      <a href="blog.html" class="block text-white py-1">Blog</a>
     </div>
   </nav>
+
+  <!-- Filter Bar -->
+  <div class="max-w-6xl mx-auto px-4 pt-28 pb-4">
+    <div class="flex flex-wrap gap-4 items-center bg-white rounded-xl shadow p-4">
+      <label class="font-semibold">Cuisine:
+        <select id="filter-cuisine" class="ml-2 border rounded px-2 py-1">
+          <option value="">All</option>
+          <option value="Asian">Asian</option>
+          <option value="Italian">Italian</option>
+          <option value="International">International</option>
+          <option value="Vietnamese">Vietnamese</option>
+          <option value="Indian">Indian</option>
+          <option value="Japanese">Japanese</option>
+          <option value="French">French</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Greek">Greek</option>
+          <option value="Korean">Korean</option>
+          <option value="Spanish">Spanish</option>
+        </select>
+      </label>
+      <label class="font-semibold">Diet:
+        <select id="filter-diet" class="ml-2 border rounded px-2 py-1">
+          <option value="">All</option>
+          <option value="Vegan">Vegan</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Pescatarian">Pescatarian</option>
+          <option value="Non-vegetarian">Non-vegetarian</option>
+        </select>
+      </label>
+      <label class="font-semibold">Max Cook Time:
+        <select id="filter-cooktime" class="ml-2 border rounded px-2 py-1">
+          <option value="">Any</option>
+          <option value="30">30 mins</option>
+          <option value="45">45 mins</option>
+          <option value="60">1 hour</option>
+          <option value="120">2 hours</option>
+        </select>
+      </label>
+      <button id="clear-filters" class="ml-auto bg-[#FF6B6B] text-white px-4 py-1 rounded hover:bg-[#ff4f4f]">Clear Filters</button>
+    </div>
+  </div>
 
   <!-- Recipes Grid -->
   <section id="recipes-grid" class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -39,10 +102,10 @@
   </section>
 
   <!-- Recipe Modal -->
-  <div id="recipe-modal" class="recipe-modal flex items-center justify-center p-4">
-    <div class="modal-content rounded-xl p-8 relative">
-      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-600 hover:text-[#FF6B6B]">&times;</button>
-      <div id="modal-content"></div>
+  <div id="recipe-modal" class="recipe-modal flex items-start justify-center p-4">
+    <div class="modal-content rounded-xl p-0 relative w-full max-w-xl">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-2xl text-gray-600 hover:text-[#FF6B6B] z-10 bg-white bg-opacity-80 rounded-full w-10 h-10 flex items-center justify-center">&times;</button>
+      <div id="modal-content" class="overflow-y-auto max-h-[90vh] p-8 pt-4"></div>
     </div>
   </div>
 
@@ -385,11 +448,51 @@
     }
   ]
 
-  function renderRecipes() {
+  // --- Filtering Logic ---
+  function filterRecipes() {
+    const cuisine = document.getElementById('filter-cuisine').value;
+    const diet = document.getElementById('filter-diet').value;
+    const cooktime = document.getElementById('filter-cooktime').value;
+
+    let filtered = allRecipes.slice();
+
+    if (cuisine) {
+      filtered = filtered.filter(r => r.cuisine === cuisine);
+    }
+    if (diet) {
+      filtered = filtered.filter(r => r.diet === diet);
+    }
+    if (cooktime) {
+      // Convert cookTime string to minutes for comparison
+      filtered = filtered.filter(r => {
+        // Extract number from cookTime string (e.g., "30 mins", "1 hr 15 mins")
+        let mins = 0;
+        const match = r.cookTime.match(/(\d+)\s*hr/);
+        if (match) mins += parseInt(match[1], 10) * 60;
+        const minMatch = r.cookTime.match(/(\d+)\s*min/);
+        if (minMatch) mins += parseInt(minMatch[1], 10);
+        if (!match && !minMatch) {
+          // fallback: try to parse as number
+          mins = parseInt(r.cookTime, 10) || 0;
+        }
+        return mins <= parseInt(cooktime, 10);
+      });
+    }
+
+    renderRecipes(filtered);
+  }
+
+  // --- Render Recipes (with optional filtered list) ---
+  function renderRecipes(recipes = allRecipes) {
     const grid = document.getElementById('recipes-grid');
     grid.innerHTML = '';
 
-    allRecipes.forEach(recipe => {
+    if (recipes.length === 0) {
+      grid.innerHTML = `<div class="col-span-full text-center text-gray-500 text-lg py-12">No recipes found for your filters.</div>`;
+      return;
+    }
+
+    recipes.forEach(recipe => {
       const card = document.createElement('div');
       card.className = 'recipe-card bg-white rounded-xl border-t-4 border-[#FF6B6B] shadow-lg hover:shadow-2xl transition-all overflow-hidden';
       card.innerHTML = `
@@ -411,36 +514,61 @@
     });
   }
 
+  // --- Modal Logic (scrollable, image on top, close button) ---
   function openModal(recipe) {
     const modal = document.getElementById("recipe-modal");
     const modalContent = document.getElementById("modal-content");
 
     modalContent.innerHTML = `
-      <h2 class="text-2xl font-bold text-[#FF6B6B] mb-4">${recipe.title}</h2>
-      <div class="w-full aspect-[4/3] bg-gray-100 mb-4 rounded-md overflow-hidden flex items-center justify-center">
-        <img src="${recipe.img}" alt="${recipe.title}" class="w-full h-full object-cover" />
+      <div>
+        <div class="w-full aspect-[4/3] bg-gray-100 mb-4 rounded-md overflow-hidden flex items-center justify-center">
+          <img src="${recipe.img}" alt="${recipe.title}" class="w-full h-full object-cover" />
+        </div>
+        <h2 class="text-2xl font-bold text-[#FF6B6B] mb-4">${recipe.title}</h2>
+        <p class="mb-2"><strong>Cuisine:</strong> ${recipe.cuisine}</p>
+        <p class="mb-2"><strong>Diet:</strong> ${recipe.diet}</p>
+        <p class="mb-2"><strong>Cook Time:</strong> ${recipe.cookTime}</p>
+        <p class="mb-2"><strong>Rating:</strong> ${recipe.rating} (${recipe.reviews} reviews)</p>
+        <h3 class="font-semibold mt-4 mb-2">Ingredients</h3>
+        <ul class="list-disc list-inside mb-4">
+          ${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+        <h3 class="font-semibold mb-2">Instructions</h3>
+        <ol class="list-decimal list-inside space-y-1">
+          ${recipe.instructions.map(step => `<li>${step}</li>`).join('')}
+        </ol>
       </div>
-      <p class="mb-2"><strong>Cuisine:</strong> ${recipe.cuisine}</p>
-      <p class="mb-2"><strong>Diet:</strong> ${recipe.diet}</p>
-      <p class="mb-2"><strong>Cook Time:</strong> ${recipe.cookTime}</p>
-      <p class="mb-2"><strong>Rating:</strong> ${recipe.rating} (${recipe.reviews} reviews)</p>
-      <h3 class="font-semibold mt-4 mb-2">Ingredients</h3>
-      <ul class="list-disc list-inside mb-4">
-        ${recipe.ingredients.map(i => `<li>${i}</li>`).join('')}
-      </ul>
-      <h3 class="font-semibold mb-2">Instructions</h3>
-      <ol class="list-decimal list-inside space-y-1">
-        ${recipe.instructions.map(step => `<li>${step}</li>`).join('')}
-      </ol>
     `;
     modal.style.display = "flex";
+    document.body.style.overflow = "hidden"; // Prevent background scroll
   }
 
   function closeModal() {
     document.getElementById("recipe-modal").style.display = "none";
+    document.body.style.overflow = ""; // Restore scroll
   }
 
-  // Initial rendering
+  // Optional: Close modal when clicking outside modal-content
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById("recipe-modal");
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.getElementById("recipe-modal").style.display = "none";
+  });
+
+  // --- Event Listeners for Filters ---
+  document.getElementById('filter-cuisine').addEventListener('change', filterRecipes);
+  document.getElementById('filter-diet').addEventListener('change', filterRecipes);
+  document.getElementById('filter-cooktime').addEventListener('change', filterRecipes);
+  document.getElementById('clear-filters').addEventListener('click', function() {
+    document.getElementById('filter-cuisine').value = '';
+    document.getElementById('filter-diet').value = '';
+    document.getElementById('filter-cooktime').value = '';
+    renderRecipes();
+  });
+
+  // --- Initial rendering ---
   renderRecipes();
 
   // Hide modal on page load to prevent flash
