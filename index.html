@@ -24,22 +24,15 @@
       --sage-green: #8AAA79;
       --warm-cream: #F4F0E8;
     }
-    * {
-      scroll-behavior: smooth;
-    }
+    * { scroll-behavior: smooth; }
     .parallax {
       background-image: url('https://images.unsplash.com/photo-1493770348161-369560ae357d');
       background-attachment: fixed;
       background-size: cover;
       background-position: center;
     }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
     @keyframes slide {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -48,9 +41,7 @@
       animation: slide 40s linear infinite;
       width: max-content;
     }
-    #trending-scroll:hover {
-      animation-play-state: paused;
-    }
+    #trending-scroll:hover { animation-play-state: paused; }
     .bg-cream { background-color: #F4F0E8; }
     .text-sage { color: #8AAA79; }
     .border-terracotta { border-color: #CC7357; }
@@ -63,22 +54,22 @@
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
       <div class="hidden md:flex gap-6 text-white">
-        <a href="shopping.html">Shopping</a>
         <a href="recipes.html">Recipes</a>
+        <a href="shopping.html">Shopping</a>
+        <a href="blog.html">Blog</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
       </div>
       <button id="menu-btn" class="md:hidden text-white text-2xl">
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2">
-      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+    <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2 absolute w-full left-0 top-[64px] shadow-lg z-50">
       <a href="recipes.html" class="block text-white py-1">Recipes</a>
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+      <a href="blog.html" class="block text-white py-1">Blog</a>
       <a href="about.html" class="block text-white py-1">About</a>
       <a href="contact.html" class="block text-white py-1">Contact</a>
-      <a href="blog.html" class="block text-white py-1">Blog</a>
     </div>
   </nav>
 
@@ -119,17 +110,7 @@
   <!-- Information/Video Section -->
   <section class="max-w-5xl mx-auto px-4 mt-10">
     <div class="relative w-full pt-[56.25%] rounded-xl overflow-hidden">
-      <video 
-        autoplay 
-        loop 
-        muted 
-        playsinline 
-        controls 
-        poster="images/video-poster.jpg"
-        class="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
-        aria-label="Home Plate Introduction Video"
-        loading="lazy"
-      >
+      <video autoplay loop muted playsinline controls poster="images/video-poster.jpg" class="absolute top-0 left-0 w-full h-full object-cover rounded-xl" aria-label="Home Plate Introduction Video" loading="lazy">
         <source src="Video/9cd8d30f5e284b5e48be4ac2490d0c4a.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -240,18 +221,6 @@
     </div>
   </section>
 
-  <!-- Newsletter Signup Section -->
-  <section class="max-w-2xl mx-auto px-4 mt-20">
-    <div class="bg-white rounded-xl shadow-lg p-8 text-center">
-      <h2 class="text-2xl font-bold text-tomato mb-2">Subscribe to Our Newsletter</h2>
-      <p class="mb-4 text-gray-800">Subscribe for weekly recipes, kitchen tips, and exclusive offers.</p>
-      <form class="flex flex-col sm:flex-row gap-3 justify-center items-center" aria-label="Newsletter Signup">
-        <input type="email" placeholder="Your email address" required aria-label="Email address" class="px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-tomato w-full sm:w-auto" />
-        <button type="submit" class="bg-tomato hover:bg-red-700 text-white px-6 py-2 rounded-full font-semibold transition" aria-label="Subscribe to newsletter">Subscribe</button>
-      </form>
-    </div>
-  </section>
-
   <!-- Accessibility & Performance Improvements -->
   <script>
     // Lazy load all images
@@ -269,16 +238,10 @@
     <i class="fas fa-arrow-up"></i>
   </button>
 
-  <!-- Social Media Footer -->
+  <!-- Footer -->
   <footer class="bg-gray-900 text-white mt-20" role="contentinfo">
     <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center">
       <p class="mb-4 md:mb-0">&copy; 2025 Home Plate. All rights reserved.</p>
-      <div class="flex space-x-4">
-        <a href="#" aria-label="Facebook" class="text-white hover:text-tomato text-2xl"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Twitter" class="text-white hover:text-tomato text-2xl"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="Instagram" class="text-white hover:text-tomato text-2xl"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="Pinterest" class="text-white hover:text-tomato text-2xl"><i class="fab fa-pinterest"></i></a>
-      </div>
     </div>
   </footer>
 
@@ -309,7 +272,7 @@
     backToTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    
   </script>
 </body>
 </html>
+
