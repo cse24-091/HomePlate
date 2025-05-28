@@ -6,62 +6,102 @@
   <title>Contact - Home Plate</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
 </head>
 <body class="bg-cream">
   <!-- Navigation -->
   <nav class="fixed w-full z-50 shadow-md" style="background-color: var(--primary-red);">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="text-white font-bold text-xl">HOME PLATE</a>
-      <div class="hidden md:flex gap-6 text-white">
-        <a href="shopping.html">Shopping</a>
-        <a href="recipes.html">Recipes</a>
-        <a href="about.html">About</a>
-        <a href="contact.html" class="font-semibold underline">Contact</a>
-        <a href="blog.html">Blog</a>
+      <div class="flex-1 flex justify-end">
+        <div class="hidden md:flex gap-6 text-white">
+          <a href="recipes.html">Recipes</a>
+          <a href="shopping.html">Shopping</a>
+          <a href="blog.html">Blog</a>
+          <a href="about.html">About</a>
+          <a href="contact.html"class="font-semibold underline">Contact</a>
+        </div>
       </div>
-      <button id="menu-btn" class="md:hidden text-white text-2xl">
+      <button id="menu-btn" class="md:hidden text-white text-2xl" aria-label="Open menu">
         <i class="fas fa-bars"></i>
       </button>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden px-4 py-2" style="background-color: var(--primary-red);">
-      <a href="shopping.html" class="block text-white py-1">Shopping</a>
+    <!-- Mobile Dropdown Nav -->
+   <div id="mobile-menu" class="hidden md:hidden bg-tomato px-4 py-2 absolute w-full left-0 top-[64px] shadow-lg z-50">
       <a href="recipes.html" class="block text-white py-1">Recipes</a>
-      <a href="about.html" class="block text-white py-1">About</a>
-      <a href="contact.html" class="block text-white py-1 font-semibold">Contact</a>
+      <a href="shopping.html" class="block text-white py-1">Shopping</a>
       <a href="blog.html" class="block text-white py-1">Blog</a>
+      <a href="about.html" class="block text-white py-1 ">About</a>
+      <a href="contact.html" class="block text-white py-1 font-semibold underline">Contact</a>
     </div>
   </nav>
+  <script>
+    // Dropdown mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      var menuBtn = document.getElementById('menu-btn');
+      var mobileMenu = document.getElementById('mobile-menu');
+      // Close menu when clicking outside
+      document.addEventListener('click', function(e) {
+        if (mobileMenu && !mobileMenu.classList.contains('hidden') && !menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden');
+        }
+      });
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    });
+  </script>
 
-  <main class="max-w-4xl mx-auto px-4 py-12">
+  <main class="max-w-6xl mx-auto px-4 pt-10 pb-20">
     <h1 class="text-4xl font-bold mb-8" style="color: var(--primary-red);">Contact Us</h1>
     <p class="mb-6 text-lg font-semibold text-sage">We would love to hear from you!</p>
+
+    <!-- Fun contact info and icons -->
+    <div class="flex flex-col md:flex-row gap-8 mb-10">
+      <div class="flex-1 flex flex-col items-center justify-center bg-cream rounded-lg p-6 shadow">
+        <i class="fas fa-envelope text-3xl mb-2 text-[var(--primary-red)]"></i>
+        <p class="font-semibold">Email</p>
+        <a href="mailto:homeplate012@gmail.com" class="text-[var(--primary-red)] hover:underline">homeplate012@gmail.com</a>
+        <p class="mt-2 text-gray-700 text-center">Contact us at <span class="font-semibold">homeplate012@gmail.com</span> for any questions, feedback, or partnership opportunities!</p>
+      </div>
+    </div>
+   
     <div class="bg-white p-8 rounded-lg shadow-md">
-      <!-- New Formspree Form -->
+      <h2 class="text-2xl font-semibold mb-4 text-[var(--primary-red)] flex items-center gap-2">
+        <i class="fas fa-paper-plane"></i> Send Us a Message
+      </h2>
       <form
         action="https://formspree.io/f/xyzwqkvd"
         method="POST"
         class="space-y-4"
       >
         <div>
-          <label class="block mb-2">Your email:</label>
+          <label class="block mb-2 font-medium">Your email:</label>
           <input type="email" name="email" required class="w-full p-2 border rounded" />
         </div>
         <div>
-          <label class="block mb-2">Your message:</label>
+          <label class="block mb-2 font-medium">Your message:</label>
           <textarea name="message" required class="w-full p-2 border rounded h-32"></textarea>
         </div>
-        <!-- your other form fields go here -->
-        <button type="submit" class="bg-[var(--primary-red)] text-white px-6 py-2 rounded hover:bg-[#CC7357]">
-          Send
+        <div>
+          <label class="block mb-2 font-medium">How did you hear about us?</label>
+          <select name="referral" class="w-full p-2 border rounded">
+            <option value="">Select an option</option>
+            <option value="friend">Friend/Family</option>
+            <option value="social">Social Media</option>
+            <option value="search">Search Engine</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button type="submit" class="bg-[var(--primary-red)] text-white px-6 py-2 rounded hover:bg-[#CC7357] font-semibold flex items-center gap-2">
+          <i class="fas fa-paper-plane"></i> Send
         </button>
       </form>
     </div>
   </main>
-
-  <script>
-    document.getElementById('menu-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
